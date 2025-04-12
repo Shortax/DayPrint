@@ -7,15 +7,14 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.DayPrint.core.dayPassing;
 import org.DayPrint.core.support;
 
-@SuppressWarnings({"unused", "PointlessArithmeticExpression"})
+
+@SuppressWarnings("PointlessArithmeticExpression")
 public class checkPassingDaySchedule {
 
     //Time constants for easier reading
     private final static long tick = 1L;
     private final static long second = tick * 20L;
     private final static long minute = second * 60L;
-    private final static long hour = minute * 60L;
-    private final static long day = hour * 24L;
     private final static long dayTime = 20*minute;
 
     private static final long period = second * 3L;
@@ -68,15 +67,6 @@ public class checkPassingDaySchedule {
                         previousTime = currentTime;
                     }
                 }
-
-
-                /*previous method
-                if(previousTime >= nightEnd-period  && currentTime >= (nightEnd+period)%dayTime && currentTime <= (nightEnd+period*2L)%dayTime)
-                {
-                    previousTime = currentTime;
-                    dayPassing.passDay();
-                }
-                */
 
             }
         }.runTaskTimer(instance, delay, period);

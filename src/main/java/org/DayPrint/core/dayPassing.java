@@ -3,7 +3,6 @@ package org.DayPrint.core;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.TimeSkipEvent;
-import org.DayPrint.core.support;
 
 public class dayPassing implements Listener {
 
@@ -23,7 +22,7 @@ public class dayPassing implements Listener {
 
         int amountDays = (int) main.getConfigHandler().getEntryFromConfig(entry) + 1;
 
-        support.worldPrint("","Day: " + amountDays);
+        support.worldPrint("#","Day: " + amountDays);
 
         main.getConfigHandler().setConfigEntry(entry,amountDays);
     }
