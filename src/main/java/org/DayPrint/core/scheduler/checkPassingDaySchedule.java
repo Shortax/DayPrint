@@ -58,7 +58,7 @@ public class checkPassingDaySchedule {
 
 
                 //current method
-                if(previousTime >= nightEnd-period)
+                if(previousTime >= nightStart+(nightEnd-nightStart)/2 && previousTime <= nightEnd)
                 {
                     if(currentTime < previousTime)
                         currentTime += dayTime;

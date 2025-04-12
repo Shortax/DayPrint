@@ -14,6 +14,7 @@ public class support {
         main.getPluginInstance().getServer().broadcastMessage("[" + label + "]: " + print);
     }
 
+
     public static void playerPrint(String label, String print, Player player)
     {
         player.sendRawMessage("[" + label + "]: " + print);

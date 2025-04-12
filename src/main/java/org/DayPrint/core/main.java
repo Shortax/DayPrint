@@ -40,6 +40,7 @@ public final class main extends JavaPlugin{
         checkPassingDaySchedule.runScheduler();
 
         System.out.println("INSTALLED, WORKING CORRECTLY: " + getClass().getName().split("\\.")[1]);
+
     }
 
     public static JavaPlugin getPluginInstance()
