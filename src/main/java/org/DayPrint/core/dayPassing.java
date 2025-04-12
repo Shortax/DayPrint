@@ -1,5 +1,6 @@
 package org.DayPrint.core;
 
+import org.DayPrint.core.scheduler.checkPassingDaySchedule;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.TimeSkipEvent;
@@ -13,6 +14,8 @@ public class dayPassing implements Listener {
 
         if(event.getSkipReason().equals(TimeSkipEvent.SkipReason.NIGHT_SKIP)){
             passDay();
+            checkPassingDaySchedule.pauseSchedule(5);
+
         }
     }
 

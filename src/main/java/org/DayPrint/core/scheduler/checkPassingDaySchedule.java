@@ -1,5 +1,6 @@
 package org.DayPrint.core.scheduler;
 
+import org.DayPrint.core.constants;
 import org.DayPrint.core.main;
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -7,68 +8,68 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.DayPrint.core.dayPassing;
 import org.DayPrint.core.support;
 
-
-@SuppressWarnings("PointlessArithmeticExpression")
 public class checkPassingDaySchedule {
 
-    //Time constants for easier reading
-    private final static long tick = 1L;
-    private final static long second = tick * 20L;
-    private final static long minute = second * 60L;
-    private final static long dayTime = 20*minute;
+    private static long pause = 0;
 
-    private static final long period = second * 3L;
-    private static final long delay = second * 1L;
-
-    //normal tick times
-    private final static long nightStartNormal = 12542;
-    private final static long nightEndNormal = 23459;
-
-    //rain or storm tick times
-    private final static long nightStartRain = 12010;
-    private final static long nightEndRain = 23991;
-
-    public static void runScheduler()
+    public static BukkitRunnable runScheduler()
     {
         JavaPlugin instance = main.getPluginInstance();
         support.conPrint("Running Scheduler");
         World world = instance.getServer().getWorlds().getFirst();
 
-        new BukkitRunnable() {
+
+        return new BukkitRunnable() {
             long previousTime = 0;
             long currentTime = world.getTime();
             long nightStart;
             long nightEnd;
+
+            final long nightStartRain = constants.nightStartRain;
+            final long nightEndRain = constants.nightEndRain;
+            final long nightStartNormal = constants.nightStartNormal;
+            final long nightEndNormal = constants.nightEndNormal;
+
+            final long dayTime = constants.dayTime;
 
             @Override
             public void run() {
                 previousTime = currentTime;
                 currentTime = world.getTime();
 
-
-                if(world.hasStorm()) {
-                    nightStart = nightStartRain;
-                    nightEnd = nightEndRain;
-                }
-                else {
-                    nightStart = nightStartNormal;
-                    nightEnd = nightEndNormal;
-                }
-
-
-                //current method
-                if(previousTime >= nightStart+(nightEnd-nightStart)/2 && previousTime <= nightEnd)
+                if(pause > 0)
                 {
-                    if(currentTime < previousTime)
-                        currentTime += dayTime;
-                    if(currentTime >= nightEnd) {
-                        currentTime = world.getTime();
-                        dayPassing.passDay();
-                        previousTime = currentTime;
+                    pause-=1;
+                }
+                else{
+                    if(world.hasStorm()) {
+                        nightStart = nightStartRain;
+                        nightEnd = nightEndRain;
+                    }
+                    else {
+                        nightStart = nightStartNormal;
+                        nightEnd = nightEndNormal;
+                    }
+
+                    //current method
+                    if(previousTime >= nightStart+(nightEnd-nightStart)/2 && previousTime <= nightEnd)
+                    {
+                        if(currentTime < previousTime)
+                            currentTime += dayTime;
+                        if(currentTime >= nightEnd) {
+                            currentTime = world.getTime();
+                            dayPassing.passDay();
+                            previousTime = currentTime;
+                        }
                     }
                 }
-
             }
-        }.runTaskTimer(instance, delay, period);
+        };
+
+    }
+
+    public static void pauseSchedule(long cycles)
+    {
+        pause = cycles;
     }
 }
