@@ -1,0 +1,9 @@
+name: DayPrint
+version: '0.2-A'
+main: org.DayPrint.core.main
+api-version: '1.21'
+commands:
+  setDay:
+    description: Sets the day value in config
+    aliases: sd
+    usage: /setday
