@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'org.DayPrint'
-version = '0.3-A'
+version = '0.4-A'
 
 repositories {
     mavenCentral()

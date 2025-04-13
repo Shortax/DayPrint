@@ -27,6 +27,9 @@ public class ConfigHandler {
         defaultValues = new HashMap<>();
         defaultValues.put("days.passed",0);
 
+        String[] messages = {""};
+        defaultValues.put("custom-messages", messages);
+
         conEntries = new HashMap<>();
     }
 
