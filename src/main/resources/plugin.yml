@@ -6,4 +6,11 @@ commands:
   setDay:
     description: Sets the day value in config
     aliases: sd
+    permission: dayprint.op
+    permission-message: Not a server operator
     usage: /setday
+permissions:
+  dayprint.op:
+    description: Allows you to run the command
+    default: op
+

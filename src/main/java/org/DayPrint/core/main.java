@@ -8,7 +8,6 @@ import org.bukkit.scheduler.BukkitTask;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -54,10 +53,9 @@ public final class main extends JavaPlugin{
     public static ConfigHandler getConfigHandler()
     {   return ch;  }
 
+    @SuppressWarnings("unused")
     public static BukkitTask getTask(String key)
-    {
-        return tasks.get(key);
-    }
+    {   return tasks.get(key);    }
 
 
 }
